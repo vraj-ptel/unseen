@@ -72,15 +72,15 @@ export async function generateMsg() {
   return { output: stream.value };
 }
 
-export async function POST(req:Request){
-  try {
-    const {text:suggestedMessages}=await generateText({
-      model,
-      prompt
-    })
-    return Response.json({suggestedMessages},{status:200});
-  } catch (error) {
-    console.log("error connectiong to google api",error);
-    return Response.json({error},{status:500});
-  }
-}
+// export async function POST(req:Request){
+//   try {
+//     const {text:suggestedMessages}=await generateText({
+//       model,
+//       prompt
+//     })
+//     return Response.json({suggestedMessages},{status:200});
+//   } catch (error) {
+//     console.log("error connectiong to google api",error);
+//     return Response.json({error},{status:500});
+//   }
+// }

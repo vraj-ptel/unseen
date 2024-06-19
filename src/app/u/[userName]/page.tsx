@@ -28,7 +28,8 @@ const sendMessageSchema = z.object({
 
 // streming related ..........
 import { readStreamableValue } from 'ai/rsc';
-import { generateMsg } from "@/app/api/suggest-messages/route";
+// import { generateMsg } from "@/app/(app)/suggest-messages/suggestMessages";
+import { generateMsg } from "@/app/(app)/suggest-messages/suggestMessages";
 
 
 
