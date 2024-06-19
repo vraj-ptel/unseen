@@ -55,6 +55,7 @@ export const authOptions: NextAuthOptions = {
   ], 
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      
       await dbConnect();
       try{
         let existingUser = await UserModel.findOne({ email: user.email });
@@ -62,6 +63,7 @@ export const authOptions: NextAuthOptions = {
       if (!existingUser) {
         
         const uName=user.email?.split("@")[0];
+        user.name = uName?.split(" ").join("");
         const newUser = new UserModel({
           email: user.email,
           userName: uName?.split(" ").join(""), 
@@ -81,7 +83,7 @@ export const authOptions: NextAuthOptions = {
         console.log(e);
       }
       finally{
-        return true
+        return true;
       }
       
     },

@@ -5,9 +5,16 @@ import { Message } from "@/model/User";
 export async function POST(req: Request) {
   await dbConnect();
 
-  const { userName, content } = await req.json();
+  const { identifier, content } = await req.json();
+  
+  
   try {
-    const user = await UserModel.findOne({ userName });
+    const user = await UserModel.findOne({
+      $or: [
+        { email: decodeURIComponent(identifier)},
+        { userName: decodeURIComponent(identifier)},
+      ],
+    });
     if (!user) {
       return Response.json(
         {

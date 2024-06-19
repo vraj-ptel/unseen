@@ -37,7 +37,7 @@ import { generateMsg } from "@/app/(app)/suggest-messages/suggestMessages";
 const Page = () => {
   const param = useParams<{ userName: string }>();
   const [sendingMessage, setSendingMessage] = useState<boolean>(false);
-  const userName = param.userName;
+  const identifier = param.userName;
   const { toast } = useToast();
   const form = useForm<z.infer<typeof sendMessageSchema>>({
     resolver: zodResolver(sendMessageSchema),
@@ -56,7 +56,7 @@ const Page = () => {
         "/api/send-message",
         {
           content: data.content,
-          userName,
+          identifier,
         },
         {
           headers: {

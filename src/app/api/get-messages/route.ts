@@ -21,13 +21,16 @@ export async function GET(req: Request) {
   // console.log(user);
   // to avoid string _id in aggrigation pipelne it can cause error
   const userId = new mongoose.Types.ObjectId(user?._id);
- 
+  const email=user?.email as string;
 
   try {
     const user = await UserModel.aggregate([
       {
         $match: {
-          _id: userId,
+          $or:[
+            {_id: userId},
+            {email}
+          ]
           
         },
       },

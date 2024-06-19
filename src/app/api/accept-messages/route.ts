@@ -22,11 +22,17 @@ export async function POST(reqest: Request) {
   }
 
   const userId = user._id;
+  const email=user?.email;
   const { acceptMessage } = await reqest.json();
   
   try {
-    const updatedUser = await UserModel.findByIdAndUpdate(
-      userId,
+    const updatedUser = await UserModel.findOneAndUpdate(
+      {
+        $or: [
+          { email },
+          { _id: userId },
+        ]
+      },
       { isAcceptingMessage: acceptMessage },
       { new: true }
     );
@@ -74,9 +80,16 @@ export async function GET(req: Request) {
             {status:401}
         )
     }
+    
     const userId=user?._id;
+    const email=user?.email;
     try{
-    const foundUser=await UserModel.findById(userId);
+    const foundUser=await UserModel.findOne({
+      $or: [
+        { email},
+        { _id:userId},
+      ],
+    });
     if(!foundUser){
         return Response.json(
             {

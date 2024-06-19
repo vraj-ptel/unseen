@@ -34,6 +34,7 @@ const Dashboard = () => {
   // taking user from session
   const { data: session } = useSession();
   const user: User = session?.user as User;
+ 
 
   const form = useForm({
     resolver: zodResolver(acceptMessageSchema),
@@ -126,7 +127,7 @@ const Dashboard = () => {
   const copyToClipboard = () => {
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(
-        `${window.location.protocol}//${window.location.host}/u/${session?.user.userName}`
+        `${window.location.protocol}//${window.location.host}/u/${session?.user.userName ?? session?.user.email}`
       );
     }
     toast({
@@ -148,7 +149,7 @@ const Dashboard = () => {
         <div className="flex items-center">
           <input
             type="text"
-            value={`${window.location.protocol}//${window.location.host}/u/${session?.user.userName}`}
+            value={`${window.location.protocol}//${window.location.host}/u/${session?.user.userName ?? session?.user.email}`}
             disabled
             className="input input-bordered w-full p-2 mr-2"
           />
