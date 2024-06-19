@@ -15,11 +15,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { acceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import axios, { AxiosError } from "axios";
+
 import MessageCard from "@/components/MessageCard";
 
 const Dashboard = () => {
- 
-
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState<boolean>(false);
@@ -124,12 +123,12 @@ const Dashboard = () => {
     fetchAcceptMessages();
   }, [session, setValue, fetchAcceptMessages, fetchMessage]);
 
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-
-  const profileUrl = `${baseUrl}/u/${session?.user.userName}`;
-
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(profileUrl);
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(
+        `${window.location.protocol}//${window.location.host}/u/${session?.user.userName}`
+      );
+    }
     toast({
       title: "URL Copied!",
       description: "Profile URL has been copied to clipboard.",
@@ -149,7 +148,7 @@ const Dashboard = () => {
         <div className="flex items-center">
           <input
             type="text"
-            value={profileUrl}
+            value={`${window.location.protocol}//${window.location.host}/u/${session?.user.userName}`}
             disabled
             className="input input-bordered w-full p-2 mr-2"
           />
@@ -187,7 +186,6 @@ const Dashboard = () => {
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {isLoading ? (
           <>
-            
             <div className="flex flex-col space-y-3">
               <Skeleton className="h-[125px] w-[250px] rounded-xl" />
               <div className="space-y-2">
@@ -216,14 +214,13 @@ const Dashboard = () => {
                 <Skeleton className="h-4 w-[200px]" />
               </div>
             </div>
-
           </>
         ) : (
           <>
             {messages.length > 0 ? (
               messages.map((message, index) => (
                 <MessageCard
-                  key={ index}
+                  key={index}
                   message={message}
                   onMessageDelete={handleDeleteMessage}
                 />
