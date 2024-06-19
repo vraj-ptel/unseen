@@ -33,7 +33,7 @@ import { generateMsg } from "@/app/api/suggest-messages/route";
 
 
 
-const page = () => {
+const Page = () => {
   const param = useParams<{ userName: string }>();
   const [sendingMessage, setSendingMessage] = useState<boolean>(false);
   const userName = param.userName;
@@ -150,4 +150,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

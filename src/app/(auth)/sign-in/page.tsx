@@ -26,7 +26,7 @@ import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 
-const page = () => {
+const Page = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toast } = useToast();
@@ -161,4 +161,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

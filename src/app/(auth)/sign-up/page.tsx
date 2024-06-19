@@ -26,7 +26,7 @@ import { Loader2 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 
-const page = () => {
+const Page = () => {
   const [userName, setUserName] = useState("");
   const [userNameMessage, setUserNameMessage] = useState("");
   const [isCheckingUserName, setIsCheckingUserName] = useState(false);
@@ -86,7 +86,7 @@ const page = () => {
       // if response if success
       if (response.data.success) {
         toast({ title: "success", description: response.data.message });
-        // redirect user to verify code page
+        // redirect user to verify code Page
         router.replace(`/verify/${userName}`);
         setIsSubmitting(false);
       }
@@ -221,4 +221,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -31,7 +31,7 @@ const verifySchema = z.object({
   verifyCode: z.string().length(6, "verify code must be 6 characters long"),
 });
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const param = useParams<{ userName: string }>();
   const userName = param?.userName;
@@ -138,4 +138,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

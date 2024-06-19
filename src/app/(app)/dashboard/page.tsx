@@ -8,7 +8,6 @@ import { ApiResponse } from "@/types/apiResponse";
 import { Loader2, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useTheme } from "next-themes";
 import { Message } from "@/model/User";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
@@ -18,8 +17,8 @@ import { acceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import axios, { AxiosError } from "axios";
 import MessageCard from "@/components/MessageCard";
 
-const page = () => {
-  const{theme}=useTheme();
+const Dashboard = () => {
+ 
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -224,7 +223,7 @@ const page = () => {
             {messages.length > 0 ? (
               messages.map((message, index) => (
                 <MessageCard
-                  key={message._id ?? index}
+                  key={ index}
                   message={message}
                   onMessageDelete={handleDeleteMessage}
                 />
@@ -239,4 +238,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Dashboard;

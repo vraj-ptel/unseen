@@ -10,7 +10,7 @@ import {
 import message from "@/message.json";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-const page = () => {
+const Page = () => {
   return (
     <main className="flex flex-col items-center justify-center p-10">
       <section className="">
@@ -43,4 +43,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
